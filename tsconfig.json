@@ -1,0 +1,15 @@
+{
+	"extends": "./node_modules/@tsconfig/node20/tsconfig.json",
+	"compilerOptions": {
+		/* Visit https://aka.ms/tsconfig.json to read more about this file */
+		"outDir": "lib",
+		"rootDir": ".",
+		"declaration": true,
+		"declarationDir": "lib"
+	},
+	"include": ["src/**/*", "tests/**/*", "update-voices.ts"],
+	"exclude": ["node_modules"],
+	"ts-node": {
+		"files": true
+	}
+}

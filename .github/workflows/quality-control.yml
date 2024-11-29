@@ -1,0 +1,35 @@
+name: QC Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  checks:
+    name: QC Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install
+        run: npm install
+
+      - name: ESLint checks
+        run: npm run eslint-check
+
+      - name: Prettier checks
+        run: npm run prettier-check
+
+      - name: TSC checks
+        run: npm run tsc-check
+
+      - name: Build JS
+        run: npm run build
