@@ -30,6 +30,3 @@ jobs:
 
       - name: TSC checks
         run: npm run tsc-check
-
-      - name: Build JS
-        run: npm run build

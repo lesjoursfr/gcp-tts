@@ -5,7 +5,7 @@ import { existsSync, readFileSync, writeFileSync } from "fs";
   // Check if we have the required environment variables
   const { TTS_GCP_CREDENTIALS } = process.env;
   if (typeof TTS_GCP_CREDENTIALS !== "string") {
-    throw new Error("Missing GOOGLE_APPLICATION_CREDENTIALS or GOOGLE_APPLICATION_PROJECT_ID environment variable!");
+    throw new Error("Missing TTS_GCP_CREDENTIALS environment variable!");
   }
   if (!existsSync(TTS_GCP_CREDENTIALS)) {
     throw new Error(`${TTS_GCP_CREDENTIALS} doesn't exist!`);

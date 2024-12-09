@@ -87,6 +87,7 @@ export function encode(file: string, codec: Codecs, options: EncoderOptions): Pr
         log(`${EOL}Conversion complete : ${pc.gray(destination)}`);
         resolve(destination);
       })
+      .renice(20)
       .save(destination);
   });
 }

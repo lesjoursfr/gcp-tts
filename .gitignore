@@ -14,6 +14,10 @@ node_modules/
 !.yarn/sdks
 !.yarn/versions
 
-# Configuration & Tests folders
+# Configuration folder
 config
-texts
+
+# Test files
+tests/*wav
+tests/*m4a
+tests/*weba

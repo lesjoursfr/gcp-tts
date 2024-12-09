@@ -61,10 +61,10 @@ export async function synthesize(
       log(`Use TextToSpeechClient with the destination ${destFilePath}`);
       const [response] = await client.synthesizeSpeech(request);
       if (response.audioContent !== null && response.audioContent !== undefined) {
-        console.log("Speech synthesis finished.");
+        log("Speech synthesis finished.");
         await writeFile(destFilePath, response.audioContent);
       } else {
-        console.log("Speech synthesis failed.");
+        log("Speech synthesis failed.");
       }
     } else {
       // The limit is 1M bytes
@@ -100,6 +100,6 @@ export async function synthesize(
     // Return the destination file
     return destFilePath;
   } catch (err) {
-    throw new Error(`Can't synthesize the gievn text!`, { cause: err });
+    throw new Error(`Can't synthesize the given text!`, { cause: err });
   }
 }

@@ -10,6 +10,11 @@
 			"name": "Tests",
 			"runtimeExecutable": "${workspaceFolder}/node_modules/.bin/mocha",
 			"runtimeArgs": [],
+			"env": {
+				"TTS_GCP_CREDENTIALS": "${workspaceFolder}/config/tts-gcp-credentials.json",
+				"TTS_GCP_BUCKET": "tests-gcp-tts",
+				"DEBUG": "gcp-tts:*"
+			},
 			"outputCapture": "std",
 			"skipFiles": ["<node_internals>/**/*.js"]
 		}
