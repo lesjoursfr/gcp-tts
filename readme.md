@@ -52,10 +52,7 @@ let result = await synthesizeTextWithGCP(
 		audioEncoding: "LINEAR16",
 	},
 	{ folder: "/an/absolute/path", filename: "filename-without-extension" },
-	[
-		{ codec: Codecs.weba, options: { audioBitrate: 256 } },
-		{ codec: Codecs.m4a, options: { audioBitrate: 256 } },
-	]
+	[{ codec: Codecs.weba }, { codec: Codecs.m4a }]
 );
 ```
 

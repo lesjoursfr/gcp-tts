@@ -35,10 +35,7 @@ it("Generate WAVE, WEBA & M4A for a small text", async () => {
     { projectId: credentials.project_id, clientOptions: { credentials: credentials }, bucketId: TTS_GCP_BUCKET },
     { language: Languages.fr_FR, voice: Voices.fr_FR_Neural2_A, audioEncoding: "LINEAR16" },
     { folder: resolve(__dirname), filename: "alice-in-wonderland-short" },
-    [
-      { codec: Codecs.weba, options: { audioBitrate: 256 } },
-      { codec: Codecs.m4a, options: { audioBitrate: 256 } },
-    ]
+    [{ codec: Codecs.weba }, { codec: Codecs.m4a }]
   );
 
   assert.strictEqual(existsSync(results.sourceFile), true);

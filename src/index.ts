@@ -15,7 +15,7 @@ export async function synthesizeTextWithGCP(
   gcpConfig: GCPConfig,
   options: SynthesizeOptions,
   destination: SynthesizeDestination,
-  extraEncodes?: Array<{ codec: Codecs; options: EncoderOptions }>
+  extraEncodes?: Array<{ codec: Codecs; options?: EncoderOptions }>
 ): Promise<SynthesizeResult> {
   // Create the source version on the audio file
   const sourceFilePath = await synthesize(textToRead, gcpConfig, options, destination);

@@ -53,20 +53,20 @@ function m4a(ffmpeg: FfmpegCommand, audioBitrate: number): FfmpegCommand {
   return ffmpeg;
 }
 
-function ffmpegWithCodec(ffmpeg: FfmpegCommand, codec: string, options: EncoderOptions): FfmpegCommand {
+function ffmpegWithCodec(ffmpeg: FfmpegCommand, codec: string, options?: EncoderOptions): FfmpegCommand {
   switch (codec) {
     // Audio codecs
     case Codecs.m4a:
-      return m4a(ffmpeg, options.audioBitrate || kDefaultAudioBitrate);
+      return m4a(ffmpeg, options?.audioBitrate || kDefaultAudioBitrate);
     case Codecs.weba:
-      return weba(ffmpeg, options.audioBitrate || kDefaultAudioBitrate);
+      return weba(ffmpeg, options?.audioBitrate || kDefaultAudioBitrate);
     // Unknown codec : Throw an error
     default:
       throw new Error(`The codec ${codec} is not implemented !`);
   }
 }
 
-export function encode(file: string, codec: Codecs, options: EncoderOptions): Promise<string> {
+export function encode(file: string, codec: Codecs, options?: EncoderOptions): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     const extension = extname(file);
     const destination = file.replace(new RegExp(`${extension}$`), `.${codec}`);
