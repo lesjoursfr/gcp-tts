@@ -22,9 +22,10 @@ function weba(ffmpeg: FfmpegCommand, audioBitrate: number): FfmpegCommand {
   ffmpeg
     .format("webm")
     .noVideo()
+    .audioFrequency(24000) // Force 24000Hz sample rate to match the requested one
     .audioBitrate(`${audioBitrate}k`)
     .audioCodec("libopus")
-    .audioChannels(2)
+    .audioChannels(1) // Force mono output
     .outputOptions([
       // https://ffmpeg.org/ffmpeg-codecs.html#libopus-1
       "-vbr constrained", // Use constrained variable bit rate encoding
@@ -35,12 +36,19 @@ function weba(ffmpeg: FfmpegCommand, audioBitrate: number): FfmpegCommand {
 }
 
 function m4a(ffmpeg: FfmpegCommand, audioBitrate: number): FfmpegCommand {
-  ffmpeg.format("mp4").noVideo().audioBitrate(`${audioBitrate}k`).audioCodec("aac").audioChannels(2).outputOptions([
-    // https://ffmpeg.org/ffmpeg-codecs.html#aac
-    "-aac_coder twoloop", // Two loop searching (TLS) method
-    "-profile:a aac_low", // The default, AAC "Low-complexity" profile
-    "-movflags +faststart", // AAC Progresive download : https://trac.ffmpeg.org/wiki/Encode/AAC#Progressivedownload
-  ]);
+  ffmpeg
+    .format("mp4")
+    .noVideo()
+    .audioFrequency(24000) // Force 24000Hz sample rate to match the requested one
+    .audioBitrate(`${audioBitrate}k`)
+    .audioCodec("aac")
+    .audioChannels(1) // Force mono output
+    .outputOptions([
+      // https://ffmpeg.org/ffmpeg-codecs.html#aac
+      "-aac_coder twoloop", // Two loop searching (TLS) method
+      "-profile:a aac_low", // The default, AAC "Low-complexity" profile
+      "-movflags +faststart", // AAC Progresive download : https://trac.ffmpeg.org/wiki/Encode/AAC#Progressivedownload
+    ]);
 
   return ffmpeg;
 }

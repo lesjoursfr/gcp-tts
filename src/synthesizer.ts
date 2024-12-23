@@ -74,7 +74,7 @@ export async function synthesize(
         parent: `projects/${gcpConfig.projectId}/locations/global`,
         input: { text: textToRead }, // { text: string; } or { ssml: string ;}
         voice: { languageCode: options.language, name: options.voice },
-        audioConfig: { audioEncoding: options.audioEncoding },
+        audioConfig: { audioEncoding: options.audioEncoding, sampleRateHertz: 24000 }, // Use a 24000Hz sample rate
         outputGcsUri: `gs://${gcpConfig.bucketId}/${destFileName}`,
       };
 
