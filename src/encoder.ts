@@ -7,7 +7,7 @@ import pc from "picocolors";
 
 const log = debug("gcp-tts:encoder");
 
-const kDefaultAudioBitrate = 256;
+const kDefaultAudioBitrate = 128;
 
 export type EncoderOptions = {
   audioBitrate?: number;
