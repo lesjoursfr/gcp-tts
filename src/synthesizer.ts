@@ -3,7 +3,6 @@ import { TextToSpeechClient, TextToSpeechLongAudioSynthesizeClient } from "@goog
 import { google } from "@google-cloud/text-to-speech/build/protos/protos.js";
 import debug from "debug";
 import { writeFile } from "fs/promises";
-import type { ClientOptions } from "google-gax";
 import { join } from "path";
 import pc from "picocolors";
 import { Languages, Voices } from "./voices";
@@ -15,7 +14,7 @@ type ISynthesizeSpeechRequest = google.cloud.texttospeech.v1.ISynthesizeSpeechRe
 type IAudioConfig = google.cloud.texttospeech.v1.IAudioConfig;
 
 export type GCPConfig = {
-  clientOptions: ClientOptions;
+  clientOptions: { credentials: { client_email: string; private_key: string } };
   projectId: string;
   bucketId: string;
 };
