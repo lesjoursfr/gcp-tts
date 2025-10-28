@@ -1,6 +1,6 @@
 {
 	"name": "@lesjoursfr/gcp-tts",
-	"version": "1.0.5",
+	"version": "2.0.0",
 	"description": "Wrapper around the Google Cloud TTS module.",
 	"license": "MIT",
 	"repository": {
