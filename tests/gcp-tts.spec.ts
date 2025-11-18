@@ -33,7 +33,7 @@ it("Generate WAVE, WEBA & M4A for a small text", async () => {
   const results = await synthesizeTextWithGCP(
     text,
     { projectId: credentials.project_id, clientOptions: { credentials: credentials }, bucketId: TTS_GCP_BUCKET },
-    { language: Languages.fr_FR, voice: Voices.fr_FR_Neural2_A, audioEncoding: "LINEAR16" },
+    { language: Languages.fr_FR, voice: Voices.fr_FR_Neural2_F, audioEncoding: "LINEAR16" },
     { folder: resolve(__dirname), filename: "alice-in-wonderland-short" },
     [{ codec: Codecs.weba }, { codec: Codecs.m4a }]
   );
@@ -49,7 +49,7 @@ it("Generate WAVE for a long text", async () => {
   const results = await synthesizeTextWithGCP(
     text,
     { projectId: credentials.project_id, clientOptions: { credentials: credentials }, bucketId: TTS_GCP_BUCKET },
-    { language: Languages.fr_FR, voice: Voices.fr_FR_Neural2_A, audioEncoding: "LINEAR16" },
+    { language: Languages.fr_FR, voice: Voices.fr_FR_Neural2_F, audioEncoding: "LINEAR16" },
     { folder: resolve(__dirname), filename: "alice-in-wonderland-long" }
   );
 
