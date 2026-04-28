@@ -1,9 +1,9 @@
-import { Codecs, encode, EncoderOptions } from "./encoder";
-import { GCPConfig, synthesize, SynthesizeDestination, SynthesizeOptions } from "./synthesizer";
+import { Codecs, encode, EncoderOptions } from "./encoder.js";
+import { GCPConfig, synthesize, SynthesizeDestination, SynthesizeOptions } from "./synthesizer.js";
 
-export { Codecs, EncoderOptions } from "./encoder";
-export { GCPConfig, SynthesizeDestination, SynthesizeOptions } from "./synthesizer";
-export * from "./voices";
+export { Codecs, EncoderOptions } from "./encoder.js";
+export { GCPConfig, SynthesizeDestination, SynthesizeOptions } from "./synthesizer.js";
+export * from "./voices.js";
 
 export type SynthesizeResult = {
   sourceFile: string;

@@ -10,13 +10,14 @@
 			"name": "Tests",
 			"runtimeExecutable": "${workspaceFolder}/node_modules/.bin/mocha",
 			"runtimeArgs": [],
+			"outputCapture": "std",
+			"skipFiles": ["<node_internals>/**/*.js"],
 			"env": {
 				"TTS_GCP_CREDENTIALS": "${workspaceFolder}/config/tts-gcp-credentials.json",
 				"TTS_GCP_BUCKET": "tests-gcp-tts",
-				"DEBUG": "gcp-tts:*"
-			},
-			"outputCapture": "std",
-			"skipFiles": ["<node_internals>/**/*.js"]
+				"DEBUG": "gcp-tts:*",
+				"NODE_OPTIONS": "--loader=ts-node/esm"
+			}
 		}
 	]
 }

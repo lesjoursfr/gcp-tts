@@ -1,7 +1,8 @@
 import assert from "assert";
 import { existsSync, readFileSync } from "fs";
 import { resolve } from "path";
-import { Codecs, Languages, synthesizeTextWithGCP, Voices } from "../src/index";
+import { fileURLToPath } from "url";
+import { Codecs, Languages, synthesizeTextWithGCP, Voices } from "../src/index.js";
 
 type GcpCredentials = {
   type: string;
@@ -28,13 +29,15 @@ const credentials = Object.freeze(
   JSON.parse(readFileSync(TTS_GCP_CREDENTIALS, { encoding: "utf-8" })) as GcpCredentials
 );
 
+const dirname = fileURLToPath(new URL(".", import.meta.url));
+
 it("Generate WAVE, WEBA & M4A for a small text", async () => {
-  const text = readFileSync(resolve(__dirname, "alice-in-wonderland-short.txt"), { encoding: "utf8" });
+  const text = readFileSync(resolve(dirname, "alice-in-wonderland-short.txt"), { encoding: "utf8" });
   const results = await synthesizeTextWithGCP(
     text,
     { projectId: credentials.project_id, clientOptions: { credentials: credentials }, bucketId: TTS_GCP_BUCKET },
     { language: Languages.fr_FR, voice: Voices.fr_FR_Neural2_F, audioEncoding: "LINEAR16" },
-    { folder: resolve(__dirname), filename: "alice-in-wonderland-short" },
+    { folder: resolve(dirname), filename: "alice-in-wonderland-short" },
     [{ codec: Codecs.weba }, { codec: Codecs.m4a }]
   );
 
@@ -45,12 +48,12 @@ it("Generate WAVE, WEBA & M4A for a small text", async () => {
 }).timeout(60000);
 
 it("Generate WAVE for a long text", async () => {
-  const text = readFileSync(resolve(__dirname, "alice-in-wonderland-long.txt"), { encoding: "utf8" });
+  const text = readFileSync(resolve(dirname, "alice-in-wonderland-long.txt"), { encoding: "utf8" });
   const results = await synthesizeTextWithGCP(
     text,
     { projectId: credentials.project_id, clientOptions: { credentials: credentials }, bucketId: TTS_GCP_BUCKET },
     { language: Languages.fr_FR, voice: Voices.fr_FR_Neural2_F, audioEncoding: "LINEAR16" },
-    { folder: resolve(__dirname), filename: "alice-in-wonderland-long" }
+    { folder: resolve(dirname), filename: "alice-in-wonderland-long" }
   );
 
   assert.strictEqual(existsSync(results.sourceFile), true);
