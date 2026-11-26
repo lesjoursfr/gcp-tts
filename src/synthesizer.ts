@@ -3,6 +3,7 @@ import { TextToSpeechClient, TextToSpeechLongAudioSynthesizeClient } from "@goog
 import { google } from "@google-cloud/text-to-speech/build/protos/protos.js";
 import debug from "debug";
 import { writeFile } from "fs/promises";
+import { JWT } from "google-auth-library";
 import { join } from "path";
 import pc from "picocolors";
 import { Languages, Voices } from "./voices.js";
@@ -84,7 +85,13 @@ export async function synthesize(
       await operation.promise();
 
       // Creates a Storage client
-      const storage = new Storage(gcpConfig.clientOptions);
+      const authClient = new JWT({
+        projectId: gcpConfig.projectId,
+        email: gcpConfig.clientOptions.credentials.client_email,
+        key: gcpConfig.clientOptions.credentials.private_key,
+        scopes: ["https://www.googleapis.com/auth/cloud-platform"],
+      });
+      const storage = new Storage({ authClient });
       const bucket = storage.bucket(gcpConfig.bucketId);
 
       // Download the file
