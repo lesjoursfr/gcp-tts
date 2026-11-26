@@ -1,5 +1,4 @@
 {
 	"extension": ["ts"],
-	"spec": "tests/**/*.spec.ts",
-	"require": "ts-node/esm"
+	"spec": "tests/**/*.spec.ts"
 }

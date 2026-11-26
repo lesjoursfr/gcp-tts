@@ -33,7 +33,7 @@
 		"prettier-fix": "prettier --write .",
 		"tsc-check": "tsc --noEmit",
 		"build": "tsc -p tsconfig.build.json",
-		"test": "NODE_OPTIONS='--loader=ts-node/esm' mocha"
+		"test": "TTS_GCP_CREDENTIALS=config/tts-gcp-credentials.json TTS_GCP_BUCKET=tests-gcp-tts NODE_OPTIONS='--loader=ts-node/esm' mocha"
 	},
 	"dependencies": {
 		"@google-cloud/storage": "^9.0.0",
