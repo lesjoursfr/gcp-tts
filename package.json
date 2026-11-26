@@ -44,19 +44,19 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "10.0.1",
-		"@tsconfig/node22": "22.0.6",
+		"@tsconfig/node22": "22.0.7",
 		"@types/debug": "4.1.13",
 		"@types/fluent-ffmpeg": "2.1.28",
 		"@types/mocha": "10.0.10",
 		"@types/node": "24.19.2",
-		"eslint": "10.13.0",
+		"eslint": "10.15.0",
 		"eslint-config-prettier": "10.1.8",
-		"globals": "17.13.0",
+		"globals": "17.14.0",
 		"mocha": "12.0.3",
-		"prettier": "3.9.10",
+		"prettier": "3.10.1",
 		"ts-node": "10.9.2",
 		"typescript": "6.0.3",
-		"typescript-eslint": "8.72.0"
+		"typescript-eslint": "8.73.0"
 	},
 	"dependenciesMeta": {
 		"protobufjs": {
