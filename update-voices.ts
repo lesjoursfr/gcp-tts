@@ -1,5 +1,6 @@
 import { TextToSpeechClient } from "@google-cloud/text-to-speech";
 import { existsSync, readFileSync, writeFileSync } from "fs";
+import { JWT } from "google-auth-library";
 
 (async function () {
   // Check if we have the required environment variables
@@ -12,8 +13,16 @@ import { existsSync, readFileSync, writeFileSync } from "fs";
   }
   const credentials = Object.freeze(JSON.parse(readFileSync(TTS_GCP_CREDENTIALS, { encoding: "utf-8" })));
 
+  // Create the Authentication client for Google Cloud
+  const authClient = new JWT({
+    projectId: credentials.project_id,
+    email: credentials.client_email,
+    key: credentials.private_key,
+    scopes: ["https://www.googleapis.com/auth/cloud-platform"],
+  });
+
   // Create the speech synthesizer.
-  const client = new TextToSpeechClient({ credentials: credentials });
+  const client = new TextToSpeechClient({ authClient: authClient });
 
   // Create the enum definitions with all available voices.
   const [result] = await client.listVoices({});

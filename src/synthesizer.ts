@@ -38,6 +38,14 @@ export async function synthesize(
   destination: SynthesizeDestination
 ): Promise<string> {
   try {
+    // Create the Authentication client for Google Cloud
+    const authClient = new JWT({
+      projectId: gcpConfig.projectId,
+      email: gcpConfig.clientOptions.credentials.client_email,
+      key: gcpConfig.clientOptions.credentials.private_key,
+      scopes: ["https://www.googleapis.com/auth/cloud-platform"],
+    });
+
     // Destination path
     const destFileName = `${destination.filename}.wav`;
     const destFilePath = join(destination.folder, destFileName);
@@ -50,7 +58,7 @@ export async function synthesize(
     // Create the speech synthesizer.
     if (isShortText) {
       // The limit is 5000 bytes
-      const client = new TextToSpeechClient(gcpConfig.clientOptions);
+      const client = new TextToSpeechClient({ authClient: authClient });
       const request: ISynthesizeSpeechRequest = {
         input: { text: textToRead }, // { text: string; } or { ssml: string ;}
         voice: { languageCode: options.language, name: options.voice },
@@ -69,7 +77,7 @@ export async function synthesize(
     } else {
       // The limit is 1M bytes
       log(`Use TextToSpeechLongAudioSynthesizeClient with the destination gs://${gcpConfig.bucketId}/${destFileName}`);
-      const client = new TextToSpeechLongAudioSynthesizeClient(gcpConfig.clientOptions);
+      const client = new TextToSpeechLongAudioSynthesizeClient({ authClient: authClient });
       const request: ISynthesizeLongAudioRequest = {
         parent: `projects/${gcpConfig.projectId}/locations/global`,
         input: { text: textToRead }, // { text: string; } or { ssml: string ;}
@@ -85,13 +93,7 @@ export async function synthesize(
       await operation.promise();
 
       // Creates a Storage client
-      const authClient = new JWT({
-        projectId: gcpConfig.projectId,
-        email: gcpConfig.clientOptions.credentials.client_email,
-        key: gcpConfig.clientOptions.credentials.private_key,
-        scopes: ["https://www.googleapis.com/auth/cloud-platform"],
-      });
-      const storage = new Storage({ authClient });
+      const storage = new Storage({ authClient: authClient });
       const bucket = storage.bucket(gcpConfig.bucketId);
 
       // Download the file
